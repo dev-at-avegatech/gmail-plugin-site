@@ -107,6 +107,23 @@
             box-shadow: var(--shadow);
         }
 
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-blue);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
         /* Page Container */
         .page-container {
             min-height: 100vh;
@@ -127,7 +144,7 @@
             animation: pageEnter 0.6s ease forwards;
         }
 
-        /* Home Page */
+        /* Home Page Styles */
         .hero {
             background: var(--white);
             padding: 6rem 2rem;
@@ -398,11 +415,13 @@
             font-size: 0.9rem;
         }
 
-        /* Content Pages */
+        /* Content Pages Styles */
         .content-page {
             padding: 4rem 2rem;
             max-width: 800px;
             margin: 0 auto;
+            background: var(--light-gray);
+            min-height: 100vh;
         }
 
         .page-title {
@@ -420,7 +439,17 @@
             box-shadow: var(--shadow);
             margin-bottom: 2rem;
             border: 1px solid var(--border-color);
+            animation: slideInUp 0.8s ease forwards;
+            opacity: 0;
         }
+
+        .content-section:nth-child(2) { animation-delay: 0.1s; }
+        .content-section:nth-child(3) { animation-delay: 0.2s; }
+        .content-section:nth-child(4) { animation-delay: 0.3s; }
+        .content-section:nth-child(5) { animation-delay: 0.4s; }
+        .content-section:nth-child(6) { animation-delay: 0.5s; }
+        .content-section:nth-child(7) { animation-delay: 0.6s; }
+        .content-section:nth-child(8) { animation-delay: 0.7s; }
 
         .content-section h3 {
             font-size: 1.5rem;
@@ -451,6 +480,7 @@
             border-radius: 12px;
             box-shadow: var(--shadow);
             border: 1px solid var(--border-color);
+            margin-top: 1rem;
         }
 
         .form-group {
@@ -503,23 +533,6 @@
             box-shadow: var(--shadow);
         }
 
-        /* Mobile Menu */
-        .mobile-menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        .mobile-menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background: var(--primary-blue);
-            margin: 3px 0;
-            transition: 0.3s;
-            border-radius: 2px;
-        }
-
         /* Animations */
         @keyframes pageEnter {
             0% {
@@ -569,13 +582,38 @@
             }
         }
 
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.5;
-            }
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--border-color);
+            border-top: 4px solid var(--primary-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* Responsive Design */
@@ -617,40 +655,10 @@
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-        }
 
-        /* Loading Animation */
-        .loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--white);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-
-        .loading.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid var(--border-color);
-            border-top: 4px solid var(--primary-blue);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            .content-page {
+                padding: 2rem 1rem;
+            }
         }
     </style>
 </head>
@@ -663,17 +671,17 @@
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">FinanceFlow</a>
+            <a href="#home" class="logo">FinanceFlow</a>
             <div class="mobile-menu-toggle" id="mobileToggle">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
-                <li><a href="#" class="nav-link" data-page="terms">Terms</a></li>
-                <li><a href="#" class="nav-link" data-page="privacy">Privacy</a></li>
-                <li><a href="#" class="nav-link" data-page="support">Support</a></li>
+                <li><a href="#home" class="nav-link active" data-page="home">Home</a></li>
+                <li><a href="#terms" class="nav-link" data-page="terms">Terms</a></li>
+                <li><a href="#privacy" class="nav-link" data-page="privacy">Privacy</a></li>
+                <li><a href="#support" class="nav-link" data-page="support">Support</a></li>
                 <li><a href="#" class="cta-nav">Get Started</a></li>
             </ul>
         </div>
@@ -972,33 +980,55 @@
             }, 1000);
         });
 
-        // Navigation functionality
+        // Navigation functionality with hash routing
         const navLinks = document.querySelectorAll('.nav-link');
         const pages = document.querySelectorAll('.page');
         const navbar = document.getElementById('navbar');
         const mobileToggle = document.getElementById('mobileToggle');
         const navMenu = document.getElementById('navMenu');
 
-        // Page navigation with enhanced animations
+        // Function to show specific page
+        function showPage(pageId) {
+            // Remove active class from all links and pages
+            navLinks.forEach(l => l.classList.remove('active'));
+            pages.forEach(p => p.classList.remove('active'));
+            
+            // Add active class to corresponding page
+            const targetPage = document.getElementById(pageId);
+            const targetLink = document.querySelector(`[data-page="${pageId}"]`);
+            
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+            if (targetLink) {
+                targetLink.classList.add('active');
+            }
+            
+            // Close mobile menu
+            navMenu.classList.remove('active');
+        }
+
+        // Handle hash changes (for browser back/forward and direct links)
+        function handleHashChange() {
+            const hash = window.location.hash.slice(1); // Remove #
+            const pageId = hash || 'home'; // Default to home
+            showPage(pageId);
+        }
+
+        // Page navigation
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const targetPage = link.getAttribute('data-page');
-                
-                // Remove active class from all links and pages
-                navLinks.forEach(l => l.classList.remove('active'));
-                pages.forEach(p => p.classList.remove('active'));
-                
-                // Add active class to clicked link and corresponding page
-                link.classList.add('active');
-                setTimeout(() => {
-                    document.getElementById(targetPage).classList.add('active');
-                }, 100);
-                
-                // Close mobile menu
-                navMenu.classList.remove('active');
+                window.location.hash = targetPage;
             });
         });
+
+        // Listen for hash changes
+        window.addEventListener('hashchange', handleHashChange);
+
+        // Initial page load
+        handleHashChange();
 
         // Mobile menu toggle
         mobileToggle.addEventListener('click', () => {
@@ -1050,13 +1080,15 @@
                         animateCounter(entry.target.querySelector('.stat-number'));
                     } else if (entry.target.classList.contains('testimonial-card')) {
                         entry.target.style.animation = 'slideInUp 0.6s ease forwards';
+                    } else if (entry.target.classList.contains('content-section')) {
+                        entry.target.style.animation = 'slideInUp 0.8s ease forwards';
                     }
                 }
             });
         }, observerOptions);
 
         // Observe elements for animations
-        document.querySelectorAll('.feature-card, .stat-item, .testimonial-card').forEach(el => {
+        document.querySelectorAll('.feature-card, .stat-item, .testimonial-card, .content-section').forEach(el => {
             observer.observe(el);
         });
 
@@ -1103,7 +1135,7 @@
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const hero = document.querySelector('.hero');
-            if (hero) {
+            if (hero && document.getElementById('home').classList.contains('active')) {
                 hero.style.transform = `translateY(${scrolled * 0.2}px)`;
             }
         });
